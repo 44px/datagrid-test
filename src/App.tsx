@@ -1,5 +1,5 @@
-function App() {
-  return <div>test</div>;
-}
+import { Demo } from './Demo';
 
-export default App;
+export const App = () => {
+  return <Demo />;
+};
