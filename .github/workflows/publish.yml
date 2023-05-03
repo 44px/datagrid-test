@@ -1,0 +1,32 @@
+name: Publish to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - run: npm ci
+      - run: npm run fmt-check
+      - run: npm run lint
+      - run: npm test
+      - run: npm run build
+      - run: touch build/.nojekyll
+
+      - uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: ./build
+          branch: gh-pages
