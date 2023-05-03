@@ -69,7 +69,10 @@ export const Demo = () => {
   );
 
   const setFromPreset = (preset: Preset) => {
-    setFormInput(JSON.stringify(preset.generate(), null, 2));
+    const newForm = preset.generate();
+
+    setForm(newForm);
+    setFormInput(JSON.stringify(newForm, null, 2));
   };
 
   const updateForm = () => {
